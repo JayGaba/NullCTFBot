@@ -171,6 +171,7 @@ class CTFTime(commands.Cog):
 
         for ctf in range(0, int(amount)):
             ctf_title = upcoming_data[ctf]["title"]
+            weight = upcoming_data[ctf]["weight"]
             start = f"<t:{int(isoparse(upcoming_data[ctf]['start']).timestamp())}:F>"
             end = f"<t:{int(isoparse(upcoming_data[ctf]['finish']).timestamp())}:F>"
             dur_dict = upcoming_data[ctf]["duration"]
@@ -199,6 +200,9 @@ class CTFTime(commands.Cog):
             )
             embed.add_field(
                 name="Format", value=(ctf_place + " ") + ctf_format, inline=True
+            )
+            embed.add_field(
+                name="Weight", value=(str(weight)), inline=True
             )
             embed.add_field(name="Timeframe", value=(start + " -> ") + end, inline=True)
             await ctx.channel.send(embed=embed)
