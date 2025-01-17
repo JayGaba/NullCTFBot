@@ -38,7 +38,11 @@ class CTFTimeScheduler(commands.Cog):
             ctx = await self.bot.get_context(temp_message)
             await temp_message.delete()
             
-            await channel.send(f"Here are the upcoming CTFs this week {security_role.mention}!")
+            # Fixed announcement with proper allowed_mentions
+            await channel.send(
+                f"Here are the upcoming CTFs {security_role.mention}!",
+                allowed_mentions=discord.AllowedMentions(roles=True)
+            )
             
             upcoming_command = ctftime_command.get_command('upcoming')
             if upcoming_command:
@@ -50,7 +54,7 @@ class CTFTimeScheduler(commands.Cog):
     @tasks.loop(minutes=1)
     async def weekly_announcement(self):
         current_time = datetime.now(self.timezone)
-        target_time = current_time.replace(hour=15, minute=17, second=0, microsecond=0)
+        target_time = current_time.replace(hour=18, minute=00, second=0, microsecond=0)
         
         # Send announcement if it's Friday at target time
         if current_time.weekday() == 4 and (
