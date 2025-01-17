@@ -1,1 +1,1 @@
-default = ["help", "ctf", "config", "cipher", "utility", "ctftime"]
+default = ["help", "ctf", "config", "cipher", "utility", "ctftime","ctftime_scheduler"]
